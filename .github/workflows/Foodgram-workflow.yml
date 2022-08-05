@@ -47,7 +47,7 @@
 #           context: ./backend
 #           file: ./backend/Dockerfile
 #           push: true
-#           tags: ${{ secrets.DOCKER_USERNAME }}/foodgram_backend:latest
+#           tags: ${{ secrets.DOCKER_USERNAME }}/foodgram:latest
       
 #       - name: Send message if build_and_push_to_docker_hub failed
 #         if: ${{ failure() }}
@@ -72,7 +72,7 @@
 #           key: ${{ secrets.SSH_KEY }}
 #           passphrase: ${{ secrets.PASSPHRASE }}
 #           script: |
-#             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/foodgram_backend:latest
+#             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/foodgram:latest
 #             sudo docker-compose stop
 #             sudo docker-compose rm web
 #             sudo rm .env
