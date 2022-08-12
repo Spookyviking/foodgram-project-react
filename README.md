@@ -69,7 +69,7 @@ python -m venv venv
 4. Установите зависимости.
 ```
 python -m pip install --upgrade pip
-pip install -r api_yamdb\requirements.txt
+pip install -r backend\requirements.txt
 ```
 ## Запуск проекта в контейнерах
 1. Перейдите в директорию `infra/`, заполните файл .venv_example и после этого переименуйте его в .env
