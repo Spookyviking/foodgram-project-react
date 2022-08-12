@@ -129,6 +129,14 @@ home/<ваш_username>/docker-compose.yaml и home/<ваш_username>/nginx/defau
    * TELEGRAM_TO - id пользователя, которому будут приходить оповещения
 об успешном деплое
 
+- Выполнить миграции и подключить статику
+
+```bash
+docker-compose exec backend python manage.py makemigrations
+docker-compose exec backend python manage.py migrate
+docker-compose exec backend python manage.py collectstatic --noinput
+```
+
 ## Ссылка на проект
 Проект развернут по адресу http://51.250.96.184
 
