@@ -12,7 +12,6 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from utils.create_pdf import create_pdf
 
-# from api.filters import RecipeFilter
 from api.paginations import CustomPageSizePagination
 from api.permissions import AdminOrAuthorOrReadOnly
 from api.serializers import (FavoriteRecipeSerializer, IngredientSerialize,
@@ -40,7 +39,6 @@ class RecipeViewSet(viewsets.ModelViewSet):
     permission_classes = (AdminOrAuthorOrReadOnly,)
     pagination_class = CustomPageSizePagination
     filter_backends = (filters.DjangoFilterBackend,)
-#    filterset_class = RecipeFilter
 
     def perform_create(self, serializer):
         if not self.request.data.get("tags"):

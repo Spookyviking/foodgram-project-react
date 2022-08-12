@@ -1,7 +1,7 @@
 ﻿# Foodgram
 
 ## Технологический стек
-[![.github/workflows/Foodgram-workflow.yml](https://github.com/Spookyviking/foodgram-project-react/actions/workflows/Foodgram-workflow.yml/badge.svg?branch=master)](https://github.com/Spookyviking/foodgram-project-react/actions/workflows/Foodgram-workflow.yml)
+[![Foodgram workflow](https://github.com/Spookyviking/foodgram-project-react/actions/workflows/Foodgram-workflow.yml/badge.svg)](https://github.com/Spookyviking/foodgram-project-react/actions/workflows/Foodgram-workflow.yml)
 [![Python](https://img.shields.io/badge/-Python-464646?style=flat&logo=Python&logoColor=56C0C0&color=008080)](https://www.python.org/)
 [![Django](https://img.shields.io/badge/-Django-464646?style=flat&logo=Django&logoColor=56C0C0&color=008080)](https://www.djangoproject.com/)
 [![Django REST Framework](https://img.shields.io/badge/-Django%20REST%20Framework-464646?style=flat&logo=Django%20REST%20Framework&logoColor=56C0C0&color=008080)](https://www.django-rest-framework.org/)
@@ -37,7 +37,7 @@ Cайт, на котором пользователи могут публико�
 
 ## Техническое описание проекта
 
-К проекту по адресу  http://51.250.96.184/redoc/ подключена документация **Foodgram**.
+К проекту по адресу  http://51.250.96.184/api/docs/  подключена документация **Foodgram**.
 В ней описаны возможные запросы к API и структура ожидаемых ответов.
 Для каждого запроса указаны уровни прав доступа: пользовательские роли, которым разрешён запрос.
 
@@ -78,7 +78,7 @@ pip install -r backend\requirements.txt
 3. Для остановки контейнеров из директории `infra/` выполните команду:
    ```docker-compose down -v```
 4. Загрузка данных для примера из папки `infra/`
-   ```docker-compose exec web python manage.py loaddata fixtures.json```
+   ```docker-compose exec backend python manage.py loaddata fixtures.json```
 
 ## Deploy проекта на удаленный сервер
 Предварительно для автоматического деплоя необходимо подготовить сервер:
@@ -108,7 +108,7 @@ home/<ваш_username>/docker-compose.yaml и home/<ваш_username>/nginx/defau
 об успешном деплое
 
 ## Ссылка на проект
-Проект развернут по адресу http://51.250.96.184/api/v1/  http://51.250.96.184/admin  http://51.250.96.184/redoc
+Проект развернут по адресу http://51.250.96.184
 
 ## Автор:
 [Максим Остапенко](https://github.com/Spookyviking)
