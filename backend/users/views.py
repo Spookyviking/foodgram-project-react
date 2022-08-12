@@ -7,7 +7,7 @@ from rest_framework.response import Response
 
 from api.paginations import CustomPageSizePagination
 from api.serializers import FollowSerializer
-from users.models import Follow, User
+from users.models import Follower, User
 from users.serializers import CustomUserSerializer
 
 
@@ -39,31 +39,31 @@ class CustomUserViewSet(UserViewSet):
         if request.method == "POST":
             if self.request.user == author:
                 return Response(
-                    {"errors": "Вы не можете подписываться на самого себя."},
+                    {"errors": "Вы не можете подписываться на самого себя!"},
                     status=status.HTTP_400_BAD_REQUEST,
                 )
-            if Follow.objects.filter(
+            if Follower.objects.filter(
                     author=author, user=self.request.user
             ).exists():
                 return Response(
-                    {"errors": "Вы уже подписаны на данного пользователя."},
+                    {"errors": "Вы уже подписаны на этого пользователя!"},
                     status=status.HTTP_400_BAD_REQUEST,
                 )
-            Follow.objects.create(author=author, user=self.request.user)
+            Follower.objects.create(author=author, user=self.request.user)
             serializer = FollowSerializer(author, context={"request": request})
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
         if self.request.user == author:
             return Response(
-                {"errors": "Вы не можете отписываться от самого себя."},
+                {"errors": "Вы не можете отписываться от самого себя!"},
                 status=status.HTTP_400_BAD_REQUEST,
             )
-        follow = Follow.objects.filter(
+        follow = Follower.objects.filter(
             author=author, user_id=self.request.user
         )
         if not follow.exists():
             return Response(
-                {"errors": "Вы не подписаны на данного пользователя."},
+                {"errors": "Вы не подписаны на этого пользователя!"},
                 status=status.HTTP_400_BAD_REQUEST,
             )
         follow.delete()
