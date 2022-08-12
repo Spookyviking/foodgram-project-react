@@ -93,5 +93,5 @@ jobs:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
-            Repository: yamdb_final
+            Repository: foodgram
             ${{ github.workflow }} успешно развернут!
