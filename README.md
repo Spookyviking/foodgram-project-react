@@ -71,7 +71,29 @@ python -m venv venv
 python -m pip install --upgrade pip
 pip install -r backend\requirements.txt
 ```
+- В папке с файлом manage.py выполнить команды:
+
+```bash
+python manage.py makemigrations users
+python manage.py makemigrations recipes
+python manage.py makemigrations core
+python manage.py migrate users
+python manage.py migrate recipes
+python manage.py migrate core
+python manage.py migrate
+```
+- Создать пользователя с неограниченными правами:
+
+```bash
+python manage.py createsuperuser
+```
 ## Запуск проекта в контейнерах
+При запуске создаются три контейнера:
+
+ - контейнер базы данных **db**
+ - контейнер приложения **backend**
+ - контейнер web-сервера **nginx**
+ 
 1. Перейдите в директорию `infra/`, заполните файл .venv_example и после этого переименуйте его в .env
 2. Выполните команду:
    ```docker-compose up -d --build```
