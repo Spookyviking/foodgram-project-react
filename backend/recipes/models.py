@@ -1,6 +1,7 @@
 from colorfield.fields import ColorField
 from django.core.validators import MinValueValidator
 from django.db import models
+from django.urls import reverse
 
 from core.models import CreatedModel
 from users.models import User
@@ -48,6 +49,9 @@ class Tag(models.Model):
 
     def __str__(self):
         return self.name
+    
+    def get_absolute_url(self):
+        return reverse('tag', args=[self.slug])
 
 
 class Recipe(CreatedModel):
@@ -195,3 +199,24 @@ class RecipesTags(models.Model):
 
     def __str__(self):
         return f"{self.tag.name}, {self.recipe.name}"
+
+
+    class ShoppingCart(models.Model):
+        user = models.OneToOneField(
+            User,
+            on_delete=models.CASCADE,
+            related_name='shopping_cart',
+            verbose_name='Пользователь',
+        )
+        recipes = models.ManyToManyField(
+            'recipes.Recipe',
+            related_name='in_shopping_cart',
+            verbose_name='Рецепты',
+        )
+
+        class Meta:
+            verbose_name = 'Список покупок'
+            verbose_name_plural = 'Списки покупок'
+
+        def __str__(self):
+            return f'{self.user}'

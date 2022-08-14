@@ -9,6 +9,7 @@ from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
+from api.filters import  RecipeFilter
 from api.paginations import CustomPageSizePagination
 from api.permissions import AdminOrAuthorOrReadOnly
 from api.serializers import (
@@ -31,6 +32,7 @@ class TagViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Tag.objects.all()
     serializer_class = TagSerializer
     pagination_class = None
+    http_method_names = ('get',)
 
 
 class IngredientsViewSet(viewsets.ReadOnlyModelViewSet):
@@ -40,6 +42,7 @@ class IngredientsViewSet(viewsets.ReadOnlyModelViewSet):
     filter_backends = (filters.DjangoFilterBackend, rest_filters.SearchFilter)
     filterset_fields = ("name",)
     search_fields = ("^name",)
+    http_method_names = ('get',)
 
 
 class RecipeViewSet(viewsets.ModelViewSet):
@@ -48,6 +51,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
     permission_classes = (AdminOrAuthorOrReadOnly,)
     pagination_class = CustomPageSizePagination
     filter_backends = (filters.DjangoFilterBackend,)
+    filterset_class = RecipeFilter
 
     def perform_create(self, serializer):
         if not self.request.data.get("tags"):
