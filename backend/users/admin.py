@@ -2,8 +2,8 @@ from django.contrib import admin
 from django.contrib.admin import ModelAdmin, display
 from django.db.models import Count, Sum
 
-from users.models import Follow, User
 from recipes.models import ShoppingCart
+from users.models import Follow, User
 
 
 @admin.register(User)
