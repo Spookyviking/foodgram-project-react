@@ -14,7 +14,7 @@ from recipes.models import (
     RecipesTags,
     Tag
 )
-from users.models import Follower, User
+from users.models import Follow, User
 from users.serializers import CustomUserSerializer
 
 
@@ -202,7 +202,7 @@ class FollowSerializer(serializers.ModelSerializer):
         user = self.context.get("request").user
         if user.is_anonymous:
             return False
-        return Follower.objects.filter(author=obj, user=user).exists()
+        return Follow.objects.filter(author=obj, user=user).exists()
 
     def get_recipes(self, obj):
         recipes = Recipe.objects.filter(author=obj).all()
