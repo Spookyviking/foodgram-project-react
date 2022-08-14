@@ -6,8 +6,14 @@ from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 from rest_framework.validators import UniqueTogetherValidator
 
-from recipes.models import (FavoriteRecipe, Ingredient, IngredientsInRecipes,
-                            Recipe, RecipesTags, Tag)
+from recipes.models import (
+    FavoriteRecipe,
+    Ingredient,
+    IngredientsInRecipes,
+    Recipe,
+    RecipesTags,
+    Tag
+)
 from users.models import Follower, User
 from users.serializers import CustomUserSerializer
 

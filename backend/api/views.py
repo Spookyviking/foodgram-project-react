@@ -1,8 +1,6 @@
 import datetime as dt
 
 from django_filters import rest_framework as filters
-from recipes.models import (FavoriteRecipe, Ingredient, IngredientsInRecipes,
-                            Recipe, Tag)
 from rest_framework import filters as rest_filters
 from rest_framework import status, viewsets
 from rest_framework.decorators import action
@@ -10,12 +8,23 @@ from rest_framework.exceptions import ValidationError
 from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from utils.create_pdf import create_pdf
 
 from api.paginations import CustomPageSizePagination
 from api.permissions import AdminOrAuthorOrReadOnly
-from api.serializers import (FavoriteRecipeSerializer, IngredientSerialize,
-                             RecipeSerializer, TagSerializer)
+from api.serializers import (
+    FavoriteRecipeSerializer,
+    IngredientSerialize,
+    RecipeSerializer,
+    TagSerializer
+)
+from recipes.models import (
+    FavoriteRecipe,
+    Ingredient,
+    IngredientsInRecipes,
+    Recipe,
+    Tag
+)
+from utils.create_pdf import create_pdf
 
 
 class TagViewSet(viewsets.ReadOnlyModelViewSet):
