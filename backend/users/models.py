@@ -55,7 +55,7 @@ class User(AbstractUser):
         return self.blocked == STATUS_CHOICES[0][0]
 
 
-class Follower(models.Model):
+class Follow(models.Model):
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,

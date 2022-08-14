@@ -7,7 +7,7 @@ from rest_framework.response import Response
 
 from api.paginations import CustomPageSizePagination
 from api.serializers import FollowSerializer
-from users.models import Follower, User
+from users.models import Follow, User
 from users.serializers import CustomUserSerializer
 
 
@@ -42,14 +42,14 @@ class CustomUserViewSet(UserViewSet):
                     {"errors": "Вы не можете подписываться на самого себя!"},
                     status=status.HTTP_400_BAD_REQUEST,
                 )
-            if Follower.objects.filter(
+            if Follow.objects.filter(
                     author=author, user=self.request.user
             ).exists():
                 return Response(
                     {"errors": "Вы уже подписаны на этого пользователя!"},
                     status=status.HTTP_400_BAD_REQUEST,
                 )
-            Follower.objects.create(author=author, user=self.request.user)
+            Follow.objects.create(author=author, user=self.request.user)
             serializer = FollowSerializer(author, context={"request": request})
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
@@ -58,7 +58,7 @@ class CustomUserViewSet(UserViewSet):
                 {"errors": "Вы не можете отписываться от самого себя!"},
                 status=status.HTTP_400_BAD_REQUEST,
             )
-        follow = Follower.objects.filter(
+        follow = Follow.objects.filter(
             author=author, user_id=self.request.user
         )
         if not follow.exists():
