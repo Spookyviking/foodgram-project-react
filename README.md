@@ -94,7 +94,7 @@ python manage.py createsuperuser
  - контейнер приложения **backend**
  - контейнер web-сервера **nginx**
  
-1. Перейдите в директорию `infra/`, заполните файл .venv_example и после этого переименуйте его в .env
+1. Перейдите в директорию `infra/`, заполните файл .env.template и после этого переименуйте его в .env
 2. Выполните команду:
    ```docker-compose up -d --build```
 3. Для остановки контейнеров из директории `infra/` выполните команду:
@@ -132,9 +132,47 @@ home/<ваш_username>/docker-compose.yaml и home/<ваш_username>/nginx/defau
 - Выполнить миграции и подключить статику
 
 ```bash
-docker-compose exec backend python manage.py makemigrations
-docker-compose exec backend python manage.py migrate
+docker-compose exec python manage.py makemigrations users
+docker-compose exec python manage.py makemigrations recipes
+docker-compose exec python manage.py makemigrations core
+docker-compose exec python manage.py migrate users
+docker-compose exec python manage.py migrate recipes
+docker-compose exec python manage.py migrate core
+docker-compose exec python manage.py migrate
 docker-compose exec backend python manage.py collectstatic --noinput
+```
+- Подключиться внутрь окнтейнера можно с помощью команды:
+```
+docker exec -it <mycontainer> bash
+```
+## Как импортировать данные из своего csv файла?
+Для начала убедитесь, что первая строчка вашего csv файла совпадает с названиями полей в модели. Если на первой строчке нет названия полей или они неправильные, исправьте, прежде чем приступать к импортированию.
+
+### Импортирование с помощью скрипта
+1. Заходим в shell:
+```bash
+docker-compose exec backend python manage.py shell
+```
+2. Импортируем нужные модели:
+```python
+from recipes.models import Ingredient, Tags
+```
+3. Импортируем скрипт:
+```python
+from scripts.import_data import create_models
+```
+
+4. Запускаем скрипт с тремя параметрами:
+
+`file_path` — путь до вашего csv файла,
+
+`model` — класс модели из импортированных ранее,
+
+`print_errors` — нужно ли распечатать каждую ошибку подробно? (```True or False```)
+
+Пример:
+```python
+create_models('../data/ingredients.csv', Ingredient, True)
 ```
 
 ## Ссылка на проект
