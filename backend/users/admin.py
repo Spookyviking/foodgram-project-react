@@ -1,8 +1,7 @@
 from django.contrib import admin
 from django.db.models import Count, Sum
 
-from recipes.models import ShoppingCart
-from users.models import Follow, User
+from users.models import Follow, User, ShoppingCart
 
 
 @admin.register(User)

@@ -5,7 +5,7 @@ from django_filters.rest_framework import (
     filters,)
 
 from recipes.models import Ingredient, Recipe  # , Tag
-from users.models import User
+from users.models import User, ShoppingCart
 
 
 class IngredientFilter(django_filters.FilterSet):
@@ -67,7 +67,7 @@ class RecipeFilter(django_filters.FilterSet):
             recipes = (
                 self.request.user.shopping_cart.recipes.all()
             )
-        except recipes.models.ShoppingCart.DoesNotExist:
+        except ShoppingCart.DoesNotExist:
             return queryset
         return queryset.filter(
             pk__in=(recipe.pk for recipe in recipes)

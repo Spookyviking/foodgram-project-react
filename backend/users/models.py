@@ -80,3 +80,23 @@ class Follow(models.Model):
 
     def __str__(self):
         return f"{self.user} follows {self.author}"
+
+class ShoppingCart(models.Model):
+        user = models.OneToOneField(
+            User,
+            on_delete=models.CASCADE,
+            related_name='shopping_cart',
+            verbose_name='Пользователь',
+        )
+        recipes = models.ManyToManyField(
+            'recipes.Recipe',
+            related_name='in_shopping_cart',
+            verbose_name='Рецепты',
+        )
+
+        class Meta:
+            verbose_name = 'Список покупок'
+            verbose_name_plural = 'Списки покупок'
+
+        def __str__(self):
+            return f'{self.user}'
