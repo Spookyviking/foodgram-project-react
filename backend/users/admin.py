@@ -1,5 +1,4 @@
 from django.contrib import admin
-from django.contrib.admin import ModelAdmin, display
 from django.db.models import Count, Sum
 
 from recipes.models import ShoppingCart
@@ -63,7 +62,7 @@ class FollowAdmin(admin.ModelAdmin):
 
 
 @admin.register(ShoppingCart)
-class ShoppingCartAdmin(ModelAdmin):
+class ShoppingCartAdmin(admin.ModelAdmin):
     list_display = ('user', 'count_ingredients',)
     readonly_fields = ('count_ingredients',)
     empty_value_display = "-пусто-"
@@ -72,7 +71,7 @@ class ShoppingCartAdmin(ModelAdmin):
         verbose_name = 'Список покупок'
         verbose_name_plural = 'Списки покупок'
 
-    @display(description='Количество ингредиентов')
+    @admin.display(description='Количество ингредиентов')
     def count_ingredients(self, obj):
         return (
             obj.recipes.all().annotate(count_ingredients=Count('ingredients'))
