@@ -16,7 +16,11 @@ services:
   backend:
     image: spookyviking/foodgram:latest
     command: >
-      sh -c "python manage.py collectstatic --no-input &&
+      sh -c "python manage.py makemigrations users &&
+             python manage.py makemigrations recipes &&
+             python manage.py makemigrations core &&
+             python manage.py migrate &&
+             python manage.py collectstatic --no-input &&
              gunicorn foodgram.wsgi:application --bind 0:8000"
     restart: always
     volumes:

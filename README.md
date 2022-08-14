@@ -77,9 +77,6 @@ pip install -r backend\requirements.txt
 python manage.py makemigrations users
 python manage.py makemigrations recipes
 python manage.py makemigrations core
-python manage.py migrate users
-python manage.py migrate recipes
-python manage.py migrate core
 python manage.py migrate
 ```
 - Создать пользователя с неограниченными правами:
@@ -100,7 +97,7 @@ python manage.py createsuperuser
 3. Для остановки контейнеров из директории `infra/` выполните команду:
    ```docker-compose down -v```
 4. Загрузка данных для примера из папки `infra/`
-   ```docker-compose exec backend python manage.py loaddata fixtures.json```
+   ```docker-compose exec backend python manage.py loaddata dump.json```
 
 ## Deploy проекта на удаленный сервер
 Предварительно для автоматического деплоя необходимо подготовить сервер:
@@ -135,9 +132,6 @@ home/<ваш_username>/docker-compose.yaml и home/<ваш_username>/nginx/defau
 docker-compose exec python manage.py makemigrations users
 docker-compose exec python manage.py makemigrations recipes
 docker-compose exec python manage.py makemigrations core
-docker-compose exec python manage.py migrate users
-docker-compose exec python manage.py migrate recipes
-docker-compose exec python manage.py migrate core
 docker-compose exec python manage.py migrate
 docker-compose exec backend python manage.py collectstatic --noinput
 ```

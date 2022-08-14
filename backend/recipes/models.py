@@ -43,8 +43,8 @@ class Tag(models.Model):
 
     class Meta:
         ordering = ("name",)
-        verbose_name = "Tag"
-        verbose_name_plural = "Tags"
+        verbose_name = "Тег"
+        verbose_name_plural = "Теги"
 
     def __str__(self):
         return self.name
@@ -62,7 +62,7 @@ class Recipe(CreatedModel):
         verbose_name="Название",
     )
     image = models.ImageField(
-        verbose_name="image",
+        verbose_name="Картинка",
         upload_to="recipes/images/",
         help_text="Загрузите картинку",
     )
