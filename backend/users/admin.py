@@ -5,6 +5,7 @@ from django.db.models import Count, Sum
 from users.models import Follow, User
 from recipes.models import ShoppingCart
 
+
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
     fields = (
@@ -59,6 +60,7 @@ class FollowAdmin(admin.ModelAdmin):
         "author",
     )
     search_fields = ("author",)
+
 
 @admin.register(ShoppingCart)
 class ShoppingCartAdmin(ModelAdmin):

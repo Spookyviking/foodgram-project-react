@@ -5,7 +5,7 @@ from django_filters.rest_framework import (
     BooleanFilter,
 )
 
-from recipes.models import Ingredient, Recipe # , Tag
+from recipes.models import Ingredient, Recipe  # , Tag
 from users.models import User
 
 

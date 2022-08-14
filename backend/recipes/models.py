@@ -49,7 +49,7 @@ class Tag(models.Model):
 
     def __str__(self):
         return self.name
-    
+
     def get_absolute_url(self):
         return reverse('tag', args=[self.slug])
 
@@ -199,7 +199,6 @@ class RecipesTags(models.Model):
 
     def __str__(self):
         return f"{self.tag.name}, {self.recipe.name}"
-
 
     class ShoppingCart(models.Model):
         user = models.OneToOneField(
