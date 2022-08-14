@@ -1,7 +1,6 @@
 from colorfield.fields import ColorField
 from django.core.validators import MinValueValidator
 from django.db import models
-from django.urls import reverse
 
 from core.models import CreatedModel
 from users.models import User
@@ -49,9 +48,6 @@ class Tag(models.Model):
 
     def __str__(self):
         return self.name
-
-    def get_absolute_url(self):
-        return reverse('tag', args=[self.slug])
 
 
 class Recipe(CreatedModel):
