@@ -17,18 +17,6 @@ class CustomUserViewSet(UserViewSet):
     pagination_class = CustomPageSizePagination
 
     @action(
-        detail=False,
-        permission_classes=[IsAuthenticated],
-    )
-    def subscriptions(self, request):
-        data = User.objects.filter(following__user=self.request.user).all()
-        page = self.paginate_queryset(data)
-        serializer = FollowSerializer(
-            page, context={"request": request}, many=True
-        )
-        return self.get_paginated_response(serializer.data)
-
-    @action(
         detail=True,
         permission_classes=[IsAuthenticated],
         methods=["POST", "DELETE"],
@@ -39,14 +27,14 @@ class CustomUserViewSet(UserViewSet):
         if request.method == "POST":
             if self.request.user == author:
                 return Response(
-                    {"errors": "Вы не можете подписываться на самого себя!"},
+                    {"errors": "Вы не можете подписываться на самого себя."},
                     status=status.HTTP_400_BAD_REQUEST,
                 )
             if Follow.objects.filter(
                     author=author, user=self.request.user
             ).exists():
                 return Response(
-                    {"errors": "Вы уже подписаны на этого пользователя!"},
+                    {"errors": "Вы уже подписаны на данного пользователя."},
                     status=status.HTTP_400_BAD_REQUEST,
                 )
             Follow.objects.create(author=author, user=self.request.user)
@@ -55,7 +43,7 @@ class CustomUserViewSet(UserViewSet):
 
         if self.request.user == author:
             return Response(
-                {"errors": "Вы не можете отписываться от самого себя!"},
+                {"errors": "Вы не можете отписываться от самого себя."},
                 status=status.HTTP_400_BAD_REQUEST,
             )
         follow = Follow.objects.filter(
@@ -63,8 +51,20 @@ class CustomUserViewSet(UserViewSet):
         )
         if not follow.exists():
             return Response(
-                {"errors": "Вы не подписаны на этого пользователя!"},
+                {"errors": "Вы не подписаны на данного пользователя."},
                 status=status.HTTP_400_BAD_REQUEST,
             )
         follow.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+    @action(
+        detail=False,
+        permission_classes=[IsAuthenticated],
+    )
+    def subscriptions(self, request):
+        data = User.objects.filter(following__user=self.request.user).all()
+        page = self.paginate_queryset(data)
+        serializer = FollowSerializer(
+            page, context={"request": request}, many=True
+        )
+        return self.get_paginated_response(serializer.data)

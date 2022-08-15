@@ -6,26 +6,10 @@ from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 from rest_framework.validators import UniqueTogetherValidator
 
-from recipes.models import (
-    FavoriteRecipe,
-    Ingredient,
-    IngredientsInRecipes,
-    Recipe,
-    RecipesTags,
-    Tag
-)
+from recipes.models import (FavoriteRecipe, Ingredient, IngredientsInRecipes,
+                            Recipe, RecipesTags, Tag)
 from users.models import Follow, User
 from users.serializers import CustomUserSerializer
-
-
-class TagSerializer(serializers.ModelSerializer):
-    """
-    Сериализатор для тегов.
-    """
-
-    class Meta:
-        model = Tag
-        fields = ("id", "name", "color", "slug")
 
 
 class IngredientSerialize(serializers.ModelSerializer):
@@ -52,6 +36,16 @@ class IngredientsInRecipesSerialize(serializers.ModelSerializer):
     class Meta:
         model = IngredientsInRecipes
         fields = ("id", "name", "measurement_unit", "amount")
+
+
+class TagSerializer(serializers.ModelSerializer):
+    """
+    Сериализатор для тегов.
+    """
+
+    class Meta:
+        model = Tag
+        fields = ("id", "name", "color", "slug")
 
 
 class RecipeSerializer(serializers.ModelSerializer):

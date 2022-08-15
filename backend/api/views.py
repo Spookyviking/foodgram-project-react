@@ -1,6 +1,8 @@
 import datetime as dt
 
 from django_filters import rest_framework as filters
+from recipes.models import (FavoriteRecipe, Ingredient, IngredientsInRecipes,
+                            Recipe, Tag)
 from rest_framework import filters as rest_filters
 from rest_framework import status, viewsets
 from rest_framework.decorators import action
@@ -8,23 +10,13 @@ from rest_framework.exceptions import ValidationError
 from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from utils.create_pdf import create_pdf
 
+from api.filters import RecipeFilter
 from api.paginations import CustomPageSizePagination
 from api.permissions import AdminOrAuthorOrReadOnly
-from api.serializers import (
-    FavoriteRecipeSerializer,
-    IngredientSerialize,
-    RecipeSerializer,
-    TagSerializer
-)
-from recipes.models import (
-    FavoriteRecipe,
-    Ingredient,
-    IngredientsInRecipes,
-    Recipe,
-    Tag
-)
-from utils.create_pdf import create_pdf
+from api.serializers import (FavoriteRecipeSerializer, IngredientSerialize,
+                             RecipeSerializer, TagSerializer)
 
 
 class TagViewSet(viewsets.ReadOnlyModelViewSet):
@@ -48,6 +40,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
     permission_classes = (AdminOrAuthorOrReadOnly,)
     pagination_class = CustomPageSizePagination
     filter_backends = (filters.DjangoFilterBackend,)
+    filterset_class = RecipeFilter
 
     def perform_create(self, serializer):
         if not self.request.data.get("tags"):
@@ -123,7 +116,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
             )[0]
             if favorite_recipe.shopping_cart:
                 raise ValidationError(
-                    detail={"error": ["Рецепт уже был добавлен!"]}
+                    detail={"error": ["Рецепт уже был добавлен."]}
                 )
             favorite_recipe.shopping_cart = True
             favorite_recipe.save()
@@ -135,7 +128,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
         )
         if not favorite_recipe.shopping_cart:
             raise ValidationError(
-                detail={"error": ["Этого рецепта нет в списке покупок!"]}
+                detail={"error": ["Данного рецепта нет в списке покупок."]}
             )
         favorite_recipe.shopping_cart = False
         favorite_recipe.save()
@@ -155,7 +148,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
             )[0]
             if favorite_recipe.favorite:
                 raise ValidationError(
-                    detail={"error": ["Рецепт уже был добавлен в избранные!"]}
+                    detail={"error": ["Рецепт уже был добавлен в избранные."]}
                 )
             favorite_recipe.favorite = True
             favorite_recipe.save()
@@ -167,7 +160,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
         )
         if not favorite_recipe.shopping_cart:
             raise ValidationError(
-                detail={"error": ["Этого рецепта нет в избранных!"]}
+                detail={"error": ["Данного рецепта нет в избранных."]}
             )
         favorite_recipe.favorite = False
         favorite_recipe.save()

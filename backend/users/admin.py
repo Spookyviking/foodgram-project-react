@@ -6,18 +6,18 @@ from users.models import Follow, User
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
     fields = (
-        "first_name",
-        "last_name",
         "username",
         "email",
         "role",
+        "first_name",
+        "last_name",
         "blocked",
     )
     list_display = (
         "pk",
+        "username",
         "first_name",
         "last_name",
-        "username",
         "email",
         "role",
         "is_staff",
@@ -33,9 +33,9 @@ class UserAdmin(admin.ModelAdmin):
         ("is_staff", admin.BooleanFieldListFilter),
     )
     search_fields = (
+        "username",
         "first_name",
         "last_name",
-        "username",
     )
     empty_value_display = "-пусто-"
     list_editable = ("role",)

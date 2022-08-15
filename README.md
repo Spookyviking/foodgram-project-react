@@ -124,6 +124,12 @@ home/<ваш_username>/docker-compose.yaml и home/<ваш_username>/nginx/defau
    * DB_PORT - порт для подключения к БД
    * TELEGRAM_TOKEN - token telegram-бота
    * TELEGRAM_TO - id пользователя, которому будут приходить оповещения
+   * DJANGO_SU_ADMIN
+   * DJANGO_SU_EMAIL
+   * DJANGO_SU_PASSWORD
+   * DEBUG
+   * LANGUAGE_CODE
+   * TIME_ZONE
 об успешном деплое
 
 - Выполнить миграции и подключить статику

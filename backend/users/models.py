@@ -1,14 +1,14 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
-ROLES = [
-    ("user", "user"),
-    ("admin", "admin"),
-]
-
 STATUS_CHOICES = [
     ("b", "Block"),
     ("u", "Unblock"),
+]
+
+ROLES = [
+    ("user", "user"),
+    ("admin", "admin"),
 ]
 
 

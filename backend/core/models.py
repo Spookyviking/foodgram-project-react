@@ -3,7 +3,7 @@ from django.db import models
 
 class CreatedModel(models.Model):
     """
-    Абстрактная модель. Добавляет дату создания.
+    Абстрактная модель, которая добавляет дату создания.
     """
     created = models.DateTimeField(
         'Дата создания',

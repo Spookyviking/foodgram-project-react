@@ -5,16 +5,6 @@ from recipes.models import Ingredient, Recipe, Tag
 from users.models import User
 
 
-class IngredientFilter(django_filters.FilterSet):
-    name = django_filters.CharFilter(
-        field_name="name", lookup_expr="icontains"
-    )
-
-    class Meta:
-        model = Ingredient
-        fields = ["name"]
-
-
 class RecipeFilter(django_filters.FilterSet):
     author = filters.ModelChoiceFilter(
         to_field_name="id", queryset=User.objects.all()
@@ -46,3 +36,13 @@ class RecipeFilter(django_filters.FilterSet):
         return queryset.exclude(
             favorite__user=self.request.user, **{name: True}
         ).all()
+
+
+class IngredientFilter(django_filters.FilterSet):
+    name = django_filters.CharFilter(
+        field_name="name", lookup_expr="icontains"
+    )
+
+    class Meta:
+        model = Ingredient
+        fields = ["name"]
