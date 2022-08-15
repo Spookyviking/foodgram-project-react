@@ -9,7 +9,7 @@ coreapi==2.3.3
 coreschema==0.0.4
 cryptography==37.0.4
 defusedxml==0.7.1
-Django==3.1.14
+Django==2.2.16
 django-colorfield==0.6.3
 django-extra-fields==3.0.2
 django-filter==2.4.0
@@ -36,7 +36,7 @@ packaging==21.3
 pep8-naming==0.13.1
 Pillow==9.2.0
 pluggy==1.0.0
-psycopg2-binary==2.9.3
+psycopg2-binary==2.8.6
 py==1.11.0
 pycodestyle==2.8.0
 pycparser==2.21
