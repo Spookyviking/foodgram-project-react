@@ -178,5 +178,12 @@ create_models('../data/ingredients.csv', Ingredient, True)
 ## Ссылка на проект
 Проект развернут по адресу http://51.250.96.184
 
+Админка:
+```
+spookyviking
+test@test.test
+qwerty_1234
+```
+
 ## Автор:
 [Максим Остапенко](https://github.com/Spookyviking)
