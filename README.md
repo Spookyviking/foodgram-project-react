@@ -127,7 +127,6 @@ home/<ваш_username>/docker-compose.yaml и home/<ваш_username>/nginx/defau
    * DJANGO_SU_ADMIN - имя создаваемого суперюзера в django-проекте
    * DJANGO_SU_EMAIL - эл. почта создаваемого суперюзера в django-проекте
    * DJANGO_SU_PASSWORD - пароль создаваемого суперюзера в django-проекте
-   * DEBUG - режим DEBUG True или False
    * LANGUAGE_CODE - язык проекта
    * TIME_ZONE - зона времени проекта
 
