@@ -123,14 +123,14 @@ home/<ваш_username>/docker-compose.yaml и home/<ваш_username>/nginx/defau
    * DB_HOST - название сервиса (контейнера)
    * DB_PORT - порт для подключения к БД
    * TELEGRAM_TOKEN - token telegram-бота
-   * TELEGRAM_TO - id пользователя, которому будут приходить оповещения
-   * DJANGO_SU_ADMIN
-   * DJANGO_SU_EMAIL
-   * DJANGO_SU_PASSWORD
-   * DEBUG
-   * LANGUAGE_CODE
-   * TIME_ZONE
-об успешном деплое
+   * TELEGRAM_TO - id пользователя, которому будут приходить оповещения об успешном деплое
+   * DJANGO_SU_ADMIN - имя создаваемого суперюзера в django-проекте
+   * DJANGO_SU_EMAIL - эл. почта создаваемого суперюзера в django-проекте
+   * DJANGO_SU_PASSWORD - пароль создаваемого суперюзера в django-проекте
+   * DEBUG - режим DEBUG True или False
+   * LANGUAGE_CODE - язык проекта
+   * TIME_ZONE - зона времени проекта
+
 
 - Выполнить миграции и подключить статику
 
@@ -155,7 +155,7 @@ docker-compose exec backend python manage.py shell
 ```
 2. Импортируем нужные модели:
 ```python
-from recipes.models import Ingredient, Tags
+from recipes.models import Ingredient, Tag
 ```
 3. Импортируем скрипт:
 ```python
