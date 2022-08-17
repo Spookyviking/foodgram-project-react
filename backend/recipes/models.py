@@ -8,12 +8,12 @@ from users.models import User
 
 class Ingredient(models.Model):
     name = models.CharField(
+        "Название",
         max_length=100,
-        verbose_name="Название",
     )
     measurement_unit = models.CharField(
+        "Ед.изм.",
         max_length=10,
-        verbose_name="Ед.изм.",
     )
 
     class Meta:
@@ -27,18 +27,18 @@ class Ingredient(models.Model):
 
 class Tag(models.Model):
     name = models.CharField(
+        "Название",
         max_length=50,
         unique=True,
-        verbose_name="Название",
     )
     slug = models.SlugField(
+        "slug",
         max_length=50,
         unique=True,
-        verbose_name="slug",
     )
     color = ColorField(
+        "Цветовой код",
         default="#FF0000",
-        verbose_name="Цветовой код",
     )
 
     class Meta:
@@ -58,16 +58,16 @@ class Recipe(CreatedModel):
         related_name="recipe",
     )
     name = models.CharField(
+        "Название",
         max_length=100,
-        verbose_name="Название",
     )
     image = models.ImageField(
-        verbose_name="Картинка",
+        "Картинка",
         upload_to="recipes/images/",
         help_text="Загрузите картинку",
     )
     text = models.TextField(
-        verbose_name="Описание",
+        "Описание",
         help_text="Введите описание рецепта",
     )
     ingredients = models.ManyToManyField(
@@ -81,7 +81,7 @@ class Recipe(CreatedModel):
         related_name="recipes",
     )
     cooking_time = models.PositiveSmallIntegerField(
-        verbose_name="Время приготовления, минуты",
+        "Время приготовления, минуты",
         validators=(
             MinValueValidator(
                 1, message="Минимальное время приготовления - 1 мин."
@@ -89,7 +89,7 @@ class Recipe(CreatedModel):
         ),
     )
     pub_date = models.DateTimeField(
-        verbose_name="Дата публикации",
+        "Дата публикации",
         auto_now_add=True,
         db_index=True,
     )
@@ -98,7 +98,7 @@ class Recipe(CreatedModel):
         ordering = ["-pub_date"]
         constraints = [
             models.UniqueConstraint(
-                fields=["author", "name"], name="unique_author_name"
+                fields=("author", "name",), name="unique_author_name"
             )
         ]
         verbose_name = "Рецепт"
@@ -124,19 +124,19 @@ class FavoriteRecipe(CreatedModel):
         verbose_name="Рецепт",
         related_name="favorite",
     )
-    favorite = models.BooleanField(verbose_name="Избранное", default=False)
+    favorite = models.BooleanField("Избранное", default=False)
     shopping_cart = models.BooleanField(
-        verbose_name="Корзина покупок",
+        "Корзина покупок",
         default=False,
     )
 
     class Meta:
-        ordering = ["-created"]
-        constraints = [
+        ordering = ("-created",)
+        constraints = (
             models.UniqueConstraint(
-                fields=["user", "recipe"], name="unique_user_recipe"
-            )
-        ]
+                fields=("user", "recipe",), name="unique_user_recipe"
+            ),
+        )
         verbose_name = "Рецепт в избранных или в списке покупок"
         verbose_name_plural = "Рецепты в избранных или в списке покупок"
 
@@ -153,7 +153,7 @@ class IngredientsInRecipes(models.Model):
         related_name="ingredient_in_recipe",
     )
     amount = models.PositiveSmallIntegerField(
-        verbose_name="Кол-во ингредиента",
+        "Кол-во ингредиента",
         validators=(
             MinValueValidator(
                 1, message="Убедитесь, что это значение больше либо равно 1."
@@ -162,7 +162,7 @@ class IngredientsInRecipes(models.Model):
     )
 
     class Meta:
-        ordering = ["-id"]
+        ordering = ("-id",)
         verbose_name = "Ингредиент в рецепт"
         verbose_name_plural = "Ингредиент в рецепт"
         constraints = (
@@ -189,7 +189,7 @@ class RecipesTags(models.Model):
     )
 
     class Meta:
-        ordering = ["-id"]
+        ordering = ("-id",)
         verbose_name = "Тег рецепта"
         verbose_name_plural = "Тeги рецептов"
 

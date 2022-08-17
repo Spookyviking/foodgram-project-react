@@ -8,6 +8,7 @@ from rest_framework.response import Response
 from api.paginations import CustomPageSizePagination
 from api.serializers import FollowSerializer
 from users.models import Follow, User
+from users.permissions import UserIsAuthor
 from users.serializers import CustomUserSerializer
 
 
@@ -18,14 +19,14 @@ class CustomUserViewSet(UserViewSet):
 
     @action(
         detail=True,
-        permission_classes=[IsAuthenticated],
+        permission_classes=(IsAuthenticated,),
         methods=["POST", "DELETE"],
     )
     def subscribe(self, request, id):
         author = get_object_or_404(User, id=id)
 
         if request.method == "POST":
-            if self.request.user == author:
+            if not UserIsAuthor:
                 return Response(
                     {"errors": "Вы не можете подписываться на самого себя."},
                     status=status.HTTP_400_BAD_REQUEST,

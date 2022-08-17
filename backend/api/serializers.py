@@ -66,13 +66,13 @@ class RecipeSerializer(serializers.ModelSerializer):
         model = Recipe
         fields = '__all__'
 
-        validators = [
+        validators = (
             UniqueTogetherValidator(
                 queryset=Recipe.objects.all(),
-                fields=("name", "author"),
+                fields=("name", "author",),
                 message="Вы уже добавляли рецепт с данным именем",
-            )
-        ]
+            ),
+        )
 
     def get_is_favorited(self, obj):
         user = self.context.get("request").user

@@ -15,23 +15,23 @@ ROLES = [
 class User(AbstractUser):
     username = models.CharField(max_length=150, unique=True)
     first_name = models.CharField(
+        "Имя",
         max_length=150,
-        verbose_name="Имя",
     )
     last_name = models.CharField(
+        "Фамилия",
         max_length=150,
-        verbose_name="Фамилия",
     )
     email = models.EmailField(
         max_length=254,
         unique=True,
     )
     role = models.CharField(
-        max_length=25, verbose_name="role", choices=ROLES, default=ROLES[0][0]
+        "role", max_length=25, choices=ROLES, default=ROLES[0][0]
     )
     blocked = models.CharField(
+        "Блокировка",
         max_length=10,
-        verbose_name="Блокировка",
         choices=STATUS_CHOICES,
         default=STATUS_CHOICES[1][0],
     )
@@ -72,11 +72,11 @@ class Follow(models.Model):
     class Meta:
         verbose_name = "Подписка"
         verbose_name_plural = "Подписки"
-        constraints = [
+        constraints = (
             models.UniqueConstraint(
-                fields=["user", "author"], name="unique_following"
+                fields=("user", "author",), name="unique_following"
             ),
-        ]
+        )
 
     def __str__(self):
         return f"{self.user} follows {self.author}"

@@ -1,5 +1,7 @@
 from django.contrib import admin
 
+from foodgram.settings import EMPTY_VALUE_FOR_ADMIN
+
 from users.models import Follow, User
 
 
@@ -37,7 +39,7 @@ class UserAdmin(admin.ModelAdmin):
         "first_name",
         "last_name",
     )
-    empty_value_display = "-пусто-"
+    empty_value_display = EMPTY_VALUE_FOR_ADMIN
     list_editable = ("role",)
     list_per_page = 10
     list_max_show_all = 100

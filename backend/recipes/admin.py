@@ -1,5 +1,7 @@
 from django.contrib import admin
 
+from foodgram.settings import EMPTY_VALUE_FOR_ADMIN
+
 from .models import (FavoriteRecipe, Ingredient, IngredientsInRecipes, Recipe,
                      RecipesTags, Tag)
 
@@ -70,7 +72,7 @@ class RecipeAdmin(admin.ModelAdmin):
         "author",
         "name",
     )
-    empty_value_display = "-пусто-"
+    empty_value_display = EMPTY_VALUE_FOR_ADMIN
 
     @staticmethod
     def favorites(obj):
