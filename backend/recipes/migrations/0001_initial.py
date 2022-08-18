@@ -58,7 +58,7 @@ class Migration(migrations.Migration):
             options={
                 'verbose_name': 'Рецепт',
                 'verbose_name_plural': 'Рецепты',
-                'ordering': ['-pub_date'],
+                'ordering': ('-pub_date',),
             },
         ),
         migrations.CreateModel(

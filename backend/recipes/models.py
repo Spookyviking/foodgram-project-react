@@ -95,7 +95,7 @@ class Recipe(CreatedModel):
     )
 
     class Meta:
-        ordering = ["-pub_date"]
+        ordering = ("-pub_date",)
         constraints = [
             models.UniqueConstraint(
                 fields=("author", "name",), name="unique_author_name"
