@@ -183,5 +183,12 @@ test@test.test
 qwerty_1234
 ```
 
+Тестовый юзер:
+```
+Test User
+aaa@aaa.aaa
+qwerty_1234
+```
+
 ## Автор:
 [Максим Остапенко](https://github.com/Spookyviking)
