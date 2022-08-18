@@ -76,7 +76,6 @@ pip install -r backend\requirements.txt
 ```bash
 python manage.py makemigrations users
 python manage.py makemigrations recipes
-python manage.py makemigrations core
 python manage.py migrate
 ```
 - Создать пользователя с неограниченными правами:
