@@ -12,7 +12,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from utils.create_pdf import create_pdf
 
-from api.filters import RecipeFilter
+from api.filters import RecipeFilter, IngredientSearchFilter
 from api.paginations import CustomPageSizePagination
 from api.permissions import AdminOrAuthorOrReadOnly
 from api.serializers import (FavoriteRecipeSerializer, IngredientSerialize,
@@ -30,6 +30,7 @@ class IngredientsViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = IngredientSerialize
     pagination_class = None
     filter_backends = (filters.DjangoFilterBackend, rest_filters.SearchFilter)
+    filterset_class = IngredientSearchFilter
     filterset_fields = ("name",)
     search_fields = ("^name",)
 
